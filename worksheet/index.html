@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>workflow</title>
+    <link rel="shortcut icon" href="./favicon.ico"/>
+    <link rel="stylesheet" href="./css/index.css">
+    <script src="./js/jquery.min.js"></script>
+    <link rel="stylesheet" href="css/color.css">
+    <script src="js/color.js"></script>
+</head>
+<body>
+    <div id="main" class="clearfix">
+        <img class="loading" src="loading.gif" height="30" width="30" style="position: absolute;display: none;left: 50%;top: 50%;z-index: 100"/>
+        <div class="topFix"></div>
+        <div class="name fl">
+            <ul>
+               <li>姓名</li>
+            </ul>
+        </div>
+        <div class="dataView fl">
+            <div class="wrapper clearfix">
+                <div class="list fl">
+                    <ul>
+                        <li></li>
+
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="leftBtn btn">
+            <svg viewBox="0 0 1024 1024" width="20" height="60"><path d="M767.921231 1024a39.384615 39.384615 0 0 0 27.884307-67.190154L350.995692 512 795.726769 67.268923a39.384615 39.384615 0 0 0-55.689846-55.689846l-472.615385 472.615385a39.384615 39.384615 0 0 0 0.07877 55.689846l472.615384 472.615384a39.227077 39.227077 0 0 0 27.805539 11.500308z" fill='#0ff'></path></svg>
+        </div>
+        <div class="rightBtn btn">
+            <svg viewBox="0 0 1024 1024" width="20" height="60"><path d="M767.921231 1024a39.384615 39.384615 0 0 0 27.884307-67.190154L350.995692 512 795.726769 67.268923a39.384615 39.384615 0 0 0-55.689846-55.689846l-472.615385 472.615385a39.384615 39.384615 0 0 0 0.07877 55.689846l472.615384 472.615384a39.227077 39.227077 0 0 0 27.805539 11.500308z" fill='#0ff'></path></svg>
+        </div>
+    </div>
+    <div class="login">
+        <div class="content">
+            <div><span>姓名:</span><input type="text" placeholder="请输入你的名字"></div>
+            <button>进入</button>
+        </div>
+    </div>
+
+    <div class="fillInfor">
+        <div class="cnt">
+            <div class="wrapper">
+                <div class="infor_list fl">
+                    <div class="dataname clearfix">
+                        <div class="data fl">
+                            <span>日期：</span> <span></span>
+                        </div>
+                        <div class="yourName fl">
+                            <span>姓名：</span> <span></span>
+                        </div>
+                    </div>
+                    <div class="project">
+                        <span>项目：</span><input type="text" placeholder=""> <span class="tips">请填写项目名称</span>
+                    </div>
+                    <div class="describe clearfix">
+                        <span class="fl">描述：</span> <textarea  class="fl" rows="3"></textarea>
+                    </div>
+                    <div class="progress clearfix">
+                        <span class="fl">进度：</span>
+                        <div class="block fl clearfix" >
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                            <span><i>0</i>/10</span>
+                        </div>
+                    </div>
+                    <div class="color clearfix">
+                        <span class="fl">背景色:</span> <span class="fl bc"></span> <div class="picker"></div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="inforBtn">
+                <div class="button fl">
+                    <div class="add  fl">+</div>
+                    <div class="remove fl">-</div>
+                </div>
+                <div class="left fl"><img src="./arrows.png" ></div>
+                <div class="page fl"><i class="now">1</i>/<i class="tol">1</i></div>
+                <div class="right fl"><img src="./arrows.png" /></div>
+            </div>
+            <div class="submit clearfix">
+                <div class="yes fl">确定</div>
+                <div class="no fl">取消</div>
+            </div>
+        </div>
+    </div>
+    <div class="hover">
+        <div class="pj clearfix">
+            <div class="tle fl">项目：</div>
+            <div class="des fl"></div>
+        </div>
+        <div class="cn clearfix">
+            <div class="tle fl">描述：</div>&nbsp;
+            <div class="fl des"></div>
+        </div>
+        <div class="pr clearfix">
+            <div class="tle fl">进度：</div>
+            <div class="fl des"></div>
+        </div>
+    </div>
+    <script src="js/index.js"></script>
+</body>
+</html>
