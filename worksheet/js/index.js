@@ -8,22 +8,58 @@ $(function () {
   }).mouseleave(function () {
     $(this).hide()
   })
+  function colorHex(str){
+    var that = str;
+    if(/^(rgb|RGB)/.test(that)){
+      var aColor = that.replace(/(?:\(|\)|rgb|RGB)*/g,"").split(",");
+      var strHex = "#";
+      for(var i=0; i<aColor.length; i++){
+        var hex = Number(aColor[i]).toString(16);
+        if(hex === "0"){
+          hex += hex;
+        }
+        strHex += hex;
+      }
+      if(strHex.length !== 7){
+        strHex = that;
+      }
+      return strHex;
+    }else if(/reg/.test(that)){
+      var aNum = that.replace(/#/,"").split("");
+      if(aNum.length === 6){
+        return that;
+      }else if(aNum.length === 3){
+        var numHex = "#";
+        for(var i=0; i<aNum.length; i+=1){
+          numHex += (aNum[i]+aNum[i]);
+        }
+        return numHex;
+      }
+    }else{
+      return that;
+    }
+  };
   function initpicker() {
-    var o= {}
     var list = $('.fillInfor .infor_list')
-    $('.picker').colpick({
-      flat:true,
-      layout:'hex',
-      color:'#eeeeee'
-    });
-    list.eq(list.length-1).find('.picker .colpick_submit').click(function () {
-      list.eq(list.length-1).find('.color span').eq(1).css('backgroundColor',list.eq(list.length-1).find('.colpick_current_color').css('backgroundColor'))
-      $('.color .picker').hide()
+    $.each(list,function (i,o) {
+      var bc = $(o).find('.color span').eq(1),bcColor=bc.css("backgroundColor")
+      if($(o).find('.colpick').length==0){
+        $(o).find('.picker').colpick({
+          flat:true,
+          layout:'hex',
+          color: bcColor?colorHex(bcColor):'#eee'
+        });
+      }
+      $(o).find('.picker .colpick_submit').click(function () {
+        bc.css('backgroundColor',$(o).find('.colpick_current_color').css('backgroundColor'))
+        $(o).find('.picker').hide()
+      })
+      bc.click(function () {
+        // console.log($(o).find('.picker'))
+        $(o).find('.picker').show()
+      })
     })
 
-    list.eq(list.length-1).find('.color span').eq(1).css('backgroundColor',(o.color?o.color:'#eee')).click(function () {
-      $('.fillInfor .picker').show()
-    })
   }
   // post 请求
   var myName='',enterBtn=false,enterView=false;
@@ -243,7 +279,7 @@ $(function () {
         // 点击显示 任务
         $.each($dataView.find('li').eq(1).find('span'),function (i,o) {
           o.onclick = function () {
-
+            // $('.fillInfor ').attr('data',$(this).css('backgroundColor'))
             $('.fillInfor .tips').hide()
             //  修改添加 信息
             var id = $(this).attr('data')
@@ -254,9 +290,7 @@ $(function () {
             inforpage = 0
             if(thisData.length==0){
               cloneinforList()
-              $('.fillInfor .infor_list').find('.color span').eq(1).css('backgroundColor',(o.color?o.color:$self.css('backgroundColor'))).click(function () {
-                $('.fillInfor .picker').show()
-              })
+              $('.fillInfor .infor_list').find('.color span').eq(1).css('backgroundColor',(o.color?o.color:$self.css('backgroundColor')))
             }else {
               $.each(thisData,function (i,o) {
                 cloneinforList()
@@ -265,11 +299,10 @@ $(function () {
                 $infor.find('.project input').val(o.project)
                 initBlock(o.stage,$('.fillInfor .infor_list').eq(i).find('.block'))
                 $infor.find('.describe textarea').val(o.content&&o.content.replace(/<br>/g,'\n'));
-                $infor.find('.color .bc').css('backgroundColor',(o.color?o.color:$self.css('backgroundColor'))).click(function () {
-                  $('.fillInfor .picker').show()
-                })
+                $infor.find('.color .bc').css('backgroundColor',(o.color?o.color:$self.css('backgroundColor')))
               })
             }
+            initpicker()
             infor_listmove('fast')
 
             // 点击确定
@@ -381,8 +414,9 @@ $(function () {
               }else {
                 $(".fillInfor .wrapper").html('')
                 cloneinforList()
-                initpicker()
               }
+              blockclick()
+              initpicker()
             }
           }
         })
@@ -579,6 +613,7 @@ $(function () {
       return
     }
     cloneinforList()
+    initpicker()
     inforpage = $(".fillInfor .wrapper .infor_list").length-1
     infor_listmove()
   })
@@ -632,7 +667,6 @@ $(function () {
       "                    </div>"+
       "                </div>";
     $(".fillInfor .wrapper").append(newinfor_list).css('width',614*$(".fillInfor .wrapper .infor_list").length)
-    initpicker()
     blockclick()
   }
   //infor_list 移动
