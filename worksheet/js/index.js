@@ -55,7 +55,6 @@ $(function () {
         $(o).find('.picker').hide()
       })
       bc.click(function () {
-        // console.log($(o).find('.picker'))
         $(o).find('.picker').show()
       })
     })
@@ -212,15 +211,16 @@ $(function () {
         (move==='leftmove')?resultList.unshift(result):resultList.push(result)
         if(result.length===0){
           if(move){
-            var liList = '',$namelength = $('.name li').length-1
+            var liList = '',$namelength = $('.name li').length-1,arrName=[];
             for(var i=0;i<$namelength;i++){
               liList+='<li><span></span><span></span><span></span><span></span><span></span><span></span><span></span></li>'
+              arrName.push($('.name li').eq(i+1).html())
             }
             $dataView.find('ul').html($firstLi).append(liList)
           }else {
             $name.html($name.find('li').eq(0)).append('<li>'+myName+'</li>')
-            console.log($dataView.find('ul'))
             $dataView.find('ul').html($firstLi).append('<li><span></span><span></span><span></span><span></span><span></span><span></span><span></span></li>')
+            var arrName = [myName]
           }
           initMain()
         }else {
